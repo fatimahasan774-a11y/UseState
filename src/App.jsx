@@ -1,50 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-const TitleUpdater = () => {
-  const [name, setName] = useState('');
-  const [greeting, setGreeting] = useState('Hello, React!');
+const MouseTracker = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    document.title = greeting;
-  }, [greeting]);
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
 
-  const handleNameChange = (e) => {
-    const inputName = e.target.value;
-    setName(inputName);
-    if (inputName.trim() !== '') {
-      setGreeting(`Hello ${inputName}`);
-    } else {
-      setGreeting('Hello, React!');
-    }
-  };
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>{greeting}</h2>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
-        <div>
-          <label>Enter your name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
-        </div>
-
-        <div>
-          <label>Custom Greeting / Message:</label>
-          <input
-            type="text"
-            value={greeting}
-            onChange={(e) => setGreeting(e.target.value)}
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
-        </div>
-      </div>
+    <div>
+      <p>X: {position.x}px</p>
+      <p>Y: {position.y}px</p>
     </div>
   );
 };
 
-export default TitleUpdater;
+export default MouseTracker;
