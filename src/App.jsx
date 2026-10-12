@@ -1,11 +1,13 @@
 // import MouseTracker from "./MouseTracker";
-import UserList from './UserList'
-import GitHubUserSearch from './GitHubUserSearch '
+// import UserList from './UserList'
+// import GitHubUserSearch from './GitHubUserSearch '
+import Fruit from './Fruits';
 
 function App() {
   return (
     <div>
-      <GitHubUserSearch />
+      <Fruit/>
+      {/* <GitHubUserSearch /> */}
    {/* <UserList/> */}
       {/* <MouseTracker /> */}
     </div>
